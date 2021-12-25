@@ -1,14 +1,35 @@
-import logo from './logo.svg';
+import { useState, useEffect, useRef } from "react";
 import './App.css';
 import SketchTest from './SketchTest.js'
 
 function App() {
+
+  const [status, setStatus] = useState("Not Connected To A Room...");
+  const [inputText, setInputText] = useState("None");
+
   return (
     <div className="App">
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
 
-        <SketchTest></SketchTest>
+        <h1>Pong.</h1>
+
+        <div class="Menu">
+        <input class="Room" placeholder='Enter Room Code' onInput={e => setInputText(e.target.value)}></input>
+        {/* 
+        Link for button css
+        https://codepen.io/Brandon-Stoyles/pen/RajYmd
+         */}
+        <button class="Enter">Create Room/Join</button>
+        </div>
+
+        <div className='Status'>{status}</div>
+
+        <SketchTest 
+          status={status} 
+          setStatus={setStatus} 
+          inputText={inputText} 
+          setInputText={setInputText}></SketchTest>
 
         {/*
         <p>
