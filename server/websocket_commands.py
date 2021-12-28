@@ -12,15 +12,15 @@ def pinMessage(client, server, client_pairs, client_room, message):
 	message = message[5:]
 	pin = message.strip()
 
-	roomLen = len(client_pairs[pin])
+	roomLen = len(client_pairs.setdefault(pin, []))
 	if roomLen == 0:
 		client_pairs[pin] = [client['id']]
-		client_room[client['id']] = "1"
+		client_room[client['id']] = pin
 		print(f"Setting ID: {client['id']} to player 1")
 		server.send_message(getClientFromID(server.clients, client['id']), "PLAYER: 1")
 	elif roomLen == 1:
 		client_pairs[pin] = client_pairs[pin] + [client['id']]
-		client_room[client['id']] = "1"
+		client_room[client['id']] = pin
 		print(f"Setting ID: {client['id']} to player 2")
 		server.send_message(getClientFromID(server.clients, client['id']), "PLAYER: 2")
 
@@ -34,6 +34,8 @@ def pinMessage(client, server, client_pairs, client_room, message):
 	else:
 		## Add code for error as roomLen should not be greater than 2
 		print(f"ERROR, room length is greater than 2, found {roomLen}")	
+	
+	return client_pairs, client_room
 
 # Handles Messages Of Mouse Movement
 def moveMessage(client, server, client_pairs, client_room, message):	

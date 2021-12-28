@@ -6,6 +6,7 @@ function App() {
 
   const [status, setStatus] = useState("Not Connected To A Room...");
   const [inputText, setInputText] = useState("None");
+  const [sendData, setSendData] = useState(false)
 
   return (
     <div className="App">
@@ -20,7 +21,7 @@ function App() {
         Link for button css
         https://codepen.io/Brandon-Stoyles/pen/RajYmd
          */}
-        <button class="Enter">Create Room/Join</button>
+        <button class="Enter" onClick={e => setSendData(true)}>Create Room/Join</button>
         </div>
 
         <div className='Status'>{status}</div>
@@ -29,6 +30,7 @@ function App() {
           status={status} 
           setStatus={setStatus} 
           inputText={inputText} 
+          sendData={sendData}
           setInputText={setInputText}></SketchTest>
 
         {/*

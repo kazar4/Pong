@@ -2,10 +2,11 @@ import logging
 from websocket_server import WebsocketServer
 import time
 from websocket_commands import *
+import _thread
 
 # pip install websocket-server
 
-client_pairs = {"1": []}
+client_pairs = {}
 client_room = {}
 
 def new_client(client, server):
@@ -22,6 +23,7 @@ def client_left(client, server):
 def message_received(client, server, message):
     
 	#print(client_pairs)
+	#print(client_room)
 
 	if len(message) > 200:
 			message = message[:200]+'..'
@@ -37,6 +39,19 @@ def message_received(client, server, message):
 
 	
 	#print("Client(%d) said: %s" % (client['id'], message))
+
+def check_state():
+	import sched, time
+	s = sched.scheduler(time.time, time.sleep)
+	def do_something(sc): 
+		print(client_pairs)
+		# do your stuff
+		s.enter(5, 1, do_something, (sc,))
+
+	s.enter(5, 1, do_something, (s,))
+	s.run()
+
+_thread.start_new_thread(check_state, ())
 
 server = WebsocketServer(host='127.0.0.1', port=13254, loglevel=logging.INFO)
 server.set_fn_new_client(new_client)
