@@ -94,7 +94,7 @@ export default (props) => {
 	})
 
 	function startConnection(pin) {
-		exampleSocket = new WebSocket("wss://kazar4:13555");
+		exampleSocket = new WebSocket("wss://kazar4.com:13555");
 	
 		exampleSocket.onmessage = function (e) {
 			//console.log("Retrived Message")
