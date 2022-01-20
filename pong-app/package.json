@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "homepage":"/Pong",
   "private": true,
   "dependencies": {
     "@babel/runtime": "^7.16.5",
