@@ -53,7 +53,7 @@ def check_state():
 
 _thread.start_new_thread(check_state, ())
 
-server = WebsocketServer(host='127.0.0.1', port=13555, loglevel=logging.INFO, key="/ssl/server.key", cert="/ssl/server.crt")
+server = WebsocketServer(host='0.0.0.0', port=13555, loglevel=logging.INFO, key="/ssl/server.key", cert="/ssl/server.crt")
 server.set_fn_new_client(new_client)
 server.set_fn_client_left(client_left)
 server.set_fn_message_received(message_received)
