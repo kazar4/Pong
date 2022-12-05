@@ -44,7 +44,7 @@ def check_state():
 	import sched, time
 	s = sched.scheduler(time.time, time.sleep)
 	def do_something(sc): 
-		print(client_pairs)
+		# print(client_pairs)
 		# do your stuff
 		s.enter(5, 1, do_something, (sc,))
 
